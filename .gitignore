@@ -1,0 +1,45 @@
+db.sqlite3
+*.pyc
+*/*.pyc
+*/*/*.pyc
+.DS_Store
+*/.DS_Store
+*/*/.DS_Store
+venv/
+.env
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local development configuration
+.env
+*/local_settings.py
+
+# Django migrations
+*/migrations/
+
+# Static files
+/staticfiles/
+*.pyc
+
+# SQLite database file
+*.db
+
+# Log files
+*.log
+*.log.*
+
+# Environment variables
+.env
+
+# Compiled Python files
+*.pyc
+
+# System Files
+.DS_Store
+
+# Visual Studio Code configuration
+.vscode/
+
+

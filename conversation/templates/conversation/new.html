@@ -1,0 +1,31 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Novo Chat{% endblock %}
+
+{% block content %}
+<h1 class="mb-6 text-3xl">New conversation</h1>
+    
+<form method="post" action="." >
+   {% csrf_token %}
+
+   <div class="space-y-4">
+       {{ form.as_p }}
+   </div>
+
+   {% if form.errors or form.non_field_errors %}
+            <div class="mb-3 p-6 bg-red-100 rounded-xl">
+                {% for field in form %}
+                    {{field.errors}}
+                {% endfor %}
+
+
+                {{form.non_field_errors}}
+            </div>
+        {% endif %}
+
+        <button class=" py-3 px-8 ml-4 mt-4 overflow-hidden text-sm font-medium text-gray-900 rounded-xl group bg-gradient-to-br from-red-200 via-red-300 to-yellow-200 group-hover:from-red-200 group-hover:via-red-300 group-hover:to-yellow-200 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400">Enviar
+   </button>
+</form>
+
+{% endblock %}
+```

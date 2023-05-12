@@ -1,0 +1,41 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Log in{% endblock %}
+
+{% block content %}
+<div class="w-1/2 my-6 mx-auto p-6 bg-gradient-to-r from-teal-50 to-lime-50 rounded-xl hover:bg-gradient-to-r hover:from-lime-100 hover:to-red-100 transition duration-500 ease-in-out">
+      <h1 class="mb-6 text-3xl">Log in</h1>
+
+      <form method="post" action=".">
+        {% csrf_token %}
+
+        
+
+        <div class="mb-3">
+          <label class="inline-block mb-3">Nome de usuário:</label><br>
+          {{form.username}}
+        </div>
+
+        <div class="mb-3">
+          <label class="inline-block mb-3">Senha:</label><br>
+          {{form.password}}
+        </div>
+
+        {% if form.errors or form.non_field_errors %}
+        <div class="mb-3 p-6 bg-red-100 rounded-xl">
+            {% for field in form %}
+                 {{field.errors}}
+            {% endfor %}
+
+
+         {{form.non_field_errors}}
+        </div>
+        {% endif %}
+
+        <button class=" py-4 px-8 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-xl group bg-gradient-to-br from-red-200 via-red-300 to-yellow-200 group-hover:from-red-200 group-hover:via-red-300 group-hover:to-yellow-200 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400">
+  Enviar
+</button>
+
+      </form>
+</div>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{{item.name}}{% endblock %}
+
+{% block content %}
+<div class="grid grid-cols-5 gap-6">
+    <div class="col-span-3"> <!--meio feio arrumar depois 2-->
+         <img src="{{ item.image.url }}" class="rounded-xl">
+    </div>
+    
+    <div class="col-span-2 p-6 bg-gray-50 rounded-xl">
+        <h1 class="mb-6 text-3xl">{{ item.name }}</h1>
+        <p class="text-gray-500"><strong>Preço: </strong>{{ item.price }}</p>
+        <p class="text-gray-500"><strong>Vendedor: </strong>{{ item.created_by.username }}</p>
+        {% if item.description %}
+        <p class="text-gray-700"><strong class="text-gray-500">Descrição: </strong><br>{{ item.description }}</p>
+        {% endif %}
+        
+
+          {% if request.user == item.created_by %}
+            <div class="mt-6 p-6 bg-white rounded-xl">
+               <p> Este item é seu!</p>
+
+               <a href="{% url 'item:edit' item.id %}" class=" inline-block text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2 mt-8">Editar</a>
+
+               <a href="{% url 'item:delete' item.id %}" class="  inline-block  mt-4 text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Deletar</a>
+            </div>
+          {% else %}
+            <a href="{% url 'conversation:new' item.id %}" class="inline-block mt-4 px-6 py-3 text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-red-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-lg text-sm  text-center mr-6 mb-2">Fale comigo</a>
+          {% endif %}
+    </div>
+</div>
+
+<div class="mt-6 px-6 py-12 bg-gray-50 rounded-xl">
+            <h2 class="mb-12 text-2xl text-center">Itens relacionados</h2>
+
+            <div class="grid grid-cols-3 gap-3">
+                {% for item in related_items %} 
+                   <div class="max-w-xs">   <!-- ajuste 3 se ficar feio foi aqui-->
+                        <a href="{% url 'item:detail' item.id %}">
+                           <div>
+                                <img src="{{ item.image.url }}" class="rounded-t-xl">
+                           </div>
+                           
+                           <div class="p-6 bg-white rounded-b-xl">
+                                <h2 class="text-2xl">{{ item.name }}</h2>
+                                <p class="text-gray-500">Price: {{ item.price }}</p>
+                           </div>
+                        </a>
+                   </div>
+                {% endfor %}
+            </div>
+
+       </div>
+
+{% endblock %}
